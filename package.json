@@ -1,11 +1,11 @@
 {
   "name": "tizentube-moje-tv",
-  "appName": "TizenTube - Moje TV TEST",
-  "version": "1.15.2-moje-tv.1",
-  "description": "Experimental TizenTube 1.15.2 with double Back shortcut to Moje TV; original upstream by reisxd (GPL-3.0).",
+  "appName": "TizenTube - Moje TV TEST v3",
+  "version": "1.15.2-moje-tv.3",
+  "description": "Test v3: the first Back is untouched; second Back opens Moje TV. New script filename avoids stale CDN JS.",
   "packageType": "mods",
   "websiteURL": "https://youtube.com/tv?additionalDataUrl=http%3A%2F%2Flocalhost%3A8085%2Fdial%2Fapps%2FYouTube",
-  "main": "dist/userScript.js",
+  "main": "dist/userScript-moje-tv-v3.js",
   "serviceFile": "dist/service.js",
   "keys": [
     "MediaPlayPause",
