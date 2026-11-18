@@ -1,18 +1,18 @@
 /*
  * Moje TV - double BACK / RETURN shortcut (EXPERIMENTAL)
  * Target: gh/romangazdik-web/mojeTV
- * For a modified StremioK/TizenBrew module on Samsung Tizen 3.x.
+ * For TizenTube via TizenBrew on Samsung Tizen 3.x.
  * BACK is a mandatory Samsung key. Do NOT put 'Back' in package.json keys.
- * A single BACK is delayed ~520 ms, then sent to the active web app.
- * A second BACK within that interval returns to Moje TV via TizenBrew.
- * ES5 only. NOT tested on the user's physical TV.
+ * A single BACK is passed through untouched to YouTube.
+ * A second BACK in quick succession returns to Moje TV via TizenBrew.
+ * The second key is intercepted; if TV handles key only natively this may not work.
+ * ES5 only. TEST VERSION: single Back is expected to work normally; double may vary.
  */
 (function () {
   'use strict';
   var HOME = 'gh/romangazdik-web/mojeTV';
-  var DOUBLE_MS = 520;
-  var pendingTimer = null;
-  var pendingTarget = null;
+  var DOUBLE_MS = 650;
+  var lastBackAt = 0;
   var goBusy = false;
 
   function isBack(e) {
@@ -24,24 +24,6 @@
     if (e.preventDefault) e.preventDefault();
     if (e.stopPropagation) e.stopPropagation();
     if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-  }
-
-  function syntheticBack(target) {
-    // Dispatch a normal keydown for JS-based Back handling after the
-    // double-click window. The TV's native/system Back handling cannot be
-    // emulated with a synthetic event.
-    try {
-      var ev = document.createEvent('Event');
-      ev.initEvent('keydown', true, true);
-      ev.__mojeTvReplayed = true;
-      Object.defineProperty(ev, 'keyCode', { get: function () { return 10009; } });
-      Object.defineProperty(ev, 'which',   { get: function () { return 10009; } });
-      Object.defineProperty(ev, 'key',     { get: function () { return 'Back'; } });
-      (target && target.dispatchEvent ? target : document).dispatchEvent(ev);
-    } catch (err) {
-      // Keep the application alive even if a browser rejects synthetic keys.
-      if (window.console && console.warn) console.warn('Moje TV: nelze zopakovat jediné Zpět', err);
-    }
   }
 
   function gotoHome() {
@@ -94,27 +76,26 @@
   }
 
   function onKeydown(e) {
-    if (e.__mojeTvReplayed || !isBack(e)) return;
-    // Avoid key-repeat causing repeated double-click actions on long press.
-    if (e.repeat) { block(e); return; }
-    if (goBusy) { block(e); return; }
-    block(e);
-    if (pendingTimer !== null) {
-      clearTimeout(pendingTimer);
-      pendingTimer = null;
-      pendingTarget = null;
+    if (!isBack(e)) return;
+    // Only count physical key presses. Let long-press repeats pass through.
+    if (e.repeat) return;
+    if (goBusy) return;
+
+    var now = Date.now();
+    if (lastBackAt && now - lastBackAt <= DOUBLE_MS) {
+      lastBackAt = 0;
+      // Only intercept the SECOND key: normal Back always remains functional.
+      block(e);
       gotoHome();
-    } else {
-      pendingTarget = e.target || document;
-      pendingTimer = setTimeout(function () {
-        var target = pendingTarget;
-        pendingTimer = null;
-        pendingTarget = null;
-        syntheticBack(target);
-      }, DOUBLE_MS);
+      return;
     }
+
+    lastBackAt = now;
+    // Intentionally do not block or replay the FIRST Back. It must reach
+    // the original YouTube key handler as a genuine, trusted event.
   }
 
-  // Capture ahead of normal app key handlers, including during playback.
+  // Capturing listener sees the key before YouTube, but we do not block a
+  // normal single Back. The one exception is the second Back of a double-click.
   window.addEventListener('keydown', onKeydown, true);
 }());
