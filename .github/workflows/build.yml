@@ -1,4 +1,4 @@
-name: Sestavit TizenTube pro Moje TV v3
+name: Sestavit TizenTube pro Moje TV v4
 on:
   push:
     branches: [main]
@@ -27,25 +27,25 @@ jobs:
           test -s "$RUNNER_TEMP/tizen-upstream/package/dist/userScript.js"
           test -s "$RUNNER_TEMP/tizen-upstream/package/dist/service.js"
           mkdir -p dist
-          cp "$RUNNER_TEMP/tizen-upstream/package/dist/userScript.js" dist/userScript-moje-tv-v3.js
+          cp "$RUNNER_TEMP/tizen-upstream/package/dist/userScript.js" dist/userScript-moje-tv-v4.js
           cp "$RUNNER_TEMP/tizen-upstream/package/dist/service.js" dist/service.js
           if test -f "$RUNNER_TEMP/tizen-upstream/package/LICENSE"; then cp "$RUNNER_TEMP/tizen-upstream/package/LICENSE" LICENSE; fi
-          printf '\n;\n' >> dist/userScript-moje-tv-v3.js
-          cat home-shortcut.js >> dist/userScript-moje-tv-v3.js
+          printf '\n;\n' >> dist/userScript-moje-tv-v4.js
+          cat home-shortcut.js >> dist/userScript-moje-tv-v4.js
       - name: Overit syntaxi
         run: |
-          node --check dist/userScript-moje-tv-v3.js
+          node --check dist/userScript-moje-tv-v4.js
           node --check dist/service.js
-      - name: Ulozit v3 do repozitare
+      - name: Ulozit v4 do repozitare
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add dist/ LICENSE 2>/dev/null || git add dist/
-          if ! git diff --cached --quiet; then git commit -m 'Build v3 [skip ci]' && git push; fi
-      - name: Pročistit jsDelivr CDN cache pro nový modul
+          if ! git diff --cached --quiet; then git commit -m 'Build v4 [skip ci]' && git push; fi
+      - name: Procistit jsDelivr CDN cache
         shell: bash
         run: |
           curl -fsS 'https://purge.jsdelivr.net/gh/romangazdik-web/TizenTube-MojeTV@main/package.json' || true
-          curl -fsS 'https://purge.jsdelivr.net/gh/romangazdik-web/TizenTube-MojeTV@main/dist/userScript-moje-tv-v3.js' || true
+          curl -fsS 'https://purge.jsdelivr.net/gh/romangazdik-web/TizenTube-MojeTV@main/dist/userScript-moje-tv-v4.js' || true
