@@ -1,22 +1,13 @@
 {
   "name": "tizentube-moje-tv",
-  "appName": "TizenTube - Moje TV TEST v3",
-  "version": "1.15.2-moje-tv.3",
-  "description": "Test v3: the first Back is untouched; second Back opens Moje TV. New script filename avoids stale CDN JS.",
+  "appName": "TizenTube - Moje TV TEST v4",
+  "version": "1.15.2-moje-tv.4",
+  "description": "v4: one Back untouched; double Back attempts direct navigation to local Moje TV, without WebSocket from HTTPS YouTube.",
   "packageType": "mods",
   "websiteURL": "https://youtube.com/tv?additionalDataUrl=http%3A%2F%2Flocalhost%3A8085%2Fdial%2Fapps%2FYouTube",
-  "main": "dist/userScript-moje-tv-v3.js",
+  "main": "dist/userScript-moje-tv-v4.js",
   "serviceFile": "dist/service.js",
-  "keys": [
-    "MediaPlayPause",
-    "MediaPlay",
-    "MediaPause",
-    "MediaStop",
-    "MediaFastForward",
-    "MediaRewind",
-    "MediaTrackNext",
-    "MediaTrackPrevious"
-  ],
+  "keys": ["MediaPlayPause", "MediaPlay", "MediaPause", "MediaStop", "MediaFastForward", "MediaRewind", "MediaTrackNext", "MediaTrackPrevious"],
   "license": "GPL-3.0-only",
   "upstream": "https://github.com/reisxd/TizenTube"
 }
