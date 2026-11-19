@@ -1,7 +1,7 @@
 /* Moje TV v4 — direct local navigation, no WebSocket from HTTPS YouTube. ES5 for Tizen 3.0. */
 (function () {
   'use strict';
-  var HOME_URL = 'http://127.0.0.1:8081/module/gh%2Fromangazdik-web%2FmojeTV/app/index.html';
+  var HOME_URL = 'http://127.0.0.1:8081/module/gh%2Fromangazdik-web%2Fnyminds-tv/app/index.html';
   var LIMIT = 650;
   var lastBack = 0;
   var lastEvent = 0;
@@ -35,7 +35,7 @@
   function goHome() {
     if (goingHome) return;
     goingHome = true;
-    status('Moje TV v4: 2x Zpet -> oteviram Moje TV');
+    status('Nyminds TV: 2x Zpet -> oteviram Nyminds TV');
     setTimeout(function () {
       try {
         // A top-level navigation rather than an insecure WebSocket from https://youtube.com.
