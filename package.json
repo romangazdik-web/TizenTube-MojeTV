@@ -1,13 +1,22 @@
 {
   "name": "tizentube-moje-tv",
-  "appName": "TizenTube - Moje TV TEST v4",
-  "version": "1.15.2-moje-tv.4",
-  "description": "v4: one Back untouched; double Back attempts direct navigation to local Moje TV, without WebSocket from HTTPS YouTube.",
+  "appName": "TizenTube – Nymind TV",
+  "version": "1.15.2-moje-tv.5",
+  "description": "v5: BACK always navigates normally; removed unsafe double-Back exit to Nymind TV; no interception of remote keys.",
   "packageType": "mods",
   "websiteURL": "https://youtube.com/tv?additionalDataUrl=http%3A%2F%2Flocalhost%3A8085%2Fdial%2Fapps%2FYouTube",
   "main": "dist/userScript-moje-tv-v4.js",
   "serviceFile": "dist/service.js",
-  "keys": ["MediaPlayPause", "MediaPlay", "MediaPause", "MediaStop", "MediaFastForward", "MediaRewind", "MediaTrackNext", "MediaTrackPrevious"],
+  "keys": [
+    "MediaPlayPause",
+    "MediaPlay",
+    "MediaPause",
+    "MediaStop",
+    "MediaFastForward",
+    "MediaRewind",
+    "MediaTrackNext",
+    "MediaTrackPrevious"
+  ],
   "license": "GPL-3.0-only",
   "upstream": "https://github.com/reisxd/TizenTube"
 }
