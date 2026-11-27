@@ -1,8 +1,8 @@
 {
   "name": "tizentube-moje-tv",
   "appName": "TizenTube – Nymind TV",
-  "version": "1.15.2-moje-tv.5",
-  "description": "v5: BACK always navigates normally; removed unsafe double-Back exit to Nymind TV; no interception of remote keys.",
+  "version": "1.15.2-moje-tv.6",
+  "description": "Nymind TV 3.0 integration: double BACK within 650ms returns to launcher; first BACK remains native to YouTube. Experimental on 2017 Tizen.",
   "packageType": "mods",
   "websiteURL": "https://youtube.com/tv?additionalDataUrl=http%3A%2F%2Flocalhost%3A8085%2Fdial%2Fapps%2FYouTube",
   "main": "dist/userScript-moje-tv-v4.js",
