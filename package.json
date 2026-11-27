@@ -1,8 +1,8 @@
 {
   "name": "tizentube-moje-tv",
   "appName": "TizenTube – Nymind TV",
-  "version": "1.15.2-moje-tv.7",
-  "description": "Native TizenTube BACK navigation only; no double-click exit or intercepted remote BACK.",
+  "version": "1.15.2-moje-tv.8",
+  "description": "Nymind Vice integration: RED key (403) opens Nymind TV 3.2; native BACK unmodified, no double-click.",
   "packageType": "mods",
   "websiteURL": "https://youtube.com/tv?additionalDataUrl=http%3A%2F%2Flocalhost%3A8085%2Fdial%2Fapps%2FYouTube",
   "main": "dist/userScript-moje-tv-v4.js",
@@ -15,7 +15,8 @@
     "MediaFastForward",
     "MediaRewind",
     "MediaTrackNext",
-    "MediaTrackPrevious"
+    "MediaTrackPrevious",
+    "ColorF0Red"
   ],
   "license": "GPL-3.0-only",
   "upstream": "https://github.com/reisxd/TizenTube"
