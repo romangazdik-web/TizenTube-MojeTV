@@ -29,9 +29,24 @@ jobs:
           mkdir -p dist
           cp "$RUNNER_TEMP/tizen-upstream/package/dist/service.js" dist/service.js
           if test -f "$RUNNER_TEMP/tizen-upstream/package/LICENSE"; then cp "$RUNNER_TEMP/tizen-upstream/package/LICENSE" LICENSE; fi
-          # RED must capture first: the original TizenTube maps 403 to Theme Configuration.
+          # Resolve conflicts in the ACTUAL upstream code, not just our listener.
+          # Original: 403=Theme Configuration, 404=PiP/special menu.
+          # On Nymind: RED=Home, GREEN=App Switcher.
+          SRC="$RUNNER_TEMP/tizen-upstream/package/dist/userScript.js" python3 - <<'PY'
+          import os
+          from pathlib import Path
+          p=Path(os.environ['SRC'])
+          src=p.read_text()
+          for old,new in [('403==e.keyCode','-903===e.keyCode'),('404==e.keyCode','-904===e.keyCode')]:
+              hits=src.count(old)
+              if hits!=1: raise SystemExit(f'Expected exactly one {old}, found {hits}')
+              src=src.replace(old,new)
+          p.write_text(src)
+          PY
           { cat home-shortcut.js; printf '\n;\n'; cat "$RUNNER_TEMP/tizen-upstream/package/dist/userScript.js"; } > dist/userScript-moje-tv-v4.js
-          grep -q 'NymindYoutubeRedHome' dist/userScript-moje-tv-v4.js
+          grep -q 'NymindNavigation' dist/userScript-moje-tv-v4.js
+          if grep -q '403==e.keyCode' dist/userScript-moje-tv-v4.js; then echo 'Original theme shortcut still present'; exit 1; fi
+          if grep -q '404==e.keyCode' dist/userScript-moje-tv-v4.js; then echo 'Original green shortcut still present'; exit 1; fi
       - name: Overit syntaxi
         run: |
           node --check dist/userScript-moje-tv-v4.js
