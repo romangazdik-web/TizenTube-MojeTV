@@ -27,11 +27,11 @@ jobs:
           test -s "$RUNNER_TEMP/tizen-upstream/package/dist/userScript.js"
           test -s "$RUNNER_TEMP/tizen-upstream/package/dist/service.js"
           mkdir -p dist
-          cp "$RUNNER_TEMP/tizen-upstream/package/dist/userScript.js" dist/userScript-moje-tv-v4.js
           cp "$RUNNER_TEMP/tizen-upstream/package/dist/service.js" dist/service.js
           if test -f "$RUNNER_TEMP/tizen-upstream/package/LICENSE"; then cp "$RUNNER_TEMP/tizen-upstream/package/LICENSE" LICENSE; fi
-          printf '\n;\n' >> dist/userScript-moje-tv-v4.js
-          cat home-shortcut.js >> dist/userScript-moje-tv-v4.js
+          # RED must capture first: the original TizenTube maps 403 to Theme Configuration.
+          { cat home-shortcut.js; printf '\n;\n'; cat "$RUNNER_TEMP/tizen-upstream/package/dist/userScript.js"; } > dist/userScript-moje-tv-v4.js
+          grep -q 'NymindYoutubeRedHome' dist/userScript-moje-tv-v4.js
       - name: Overit syntaxi
         run: |
           node --check dist/userScript-moje-tv-v4.js
