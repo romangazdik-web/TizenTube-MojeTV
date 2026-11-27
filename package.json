@@ -1,8 +1,8 @@
 {
   "name": "tizentube-moje-tv",
   "appName": "TizenTube – Nymind TV",
-  "version": "1.15.2-moje-tv.9",
-  "description": "Red-to-home repair: early keyboard capture overrides TizenTube Theme Configuration, launches Nymind OS 4.0 via TizenBrew RPC; BACK remains native.",
+  "version": "1.15.2-moje-tv.10",
+  "description": "Global RED shortcut launches the repaired Nymind OS 4.0.1; upstream TizenTube theme menu conflict resolved; native BACK preserved.",
   "packageType": "mods",
   "websiteURL": "https://youtube.com/tv?additionalDataUrl=http%3A%2F%2Flocalhost%3A8085%2Fdial%2Fapps%2FYouTube",
   "main": "dist/userScript-moje-tv-v4.js",
