@@ -5,7 +5,7 @@
  */
 (function () {
   'use strict';
-  var HOME='https://cdn.jsdelivr.net/gh/romangazdik-web/nyminds-tv@v4.0.0/app/index.html';
+  var HOME='https://cdn.jsdelivr.net/gh/romangazdik-web/nyminds-tv@v4.0.1/app/index.html';
   var busy=false;
   function goHome(){
     var ws=null,finished=false,timer=null;
