@@ -1,8 +1,8 @@
 {
   "name": "tizentube-moje-tv",
   "appName": "TizenTube – Nymind TV",
-  "version": "1.15.2-moje-tv.11",
-  "description": "Nymind Switcher: RED=Home, GREEN=App Picker. Upstream 403 Theme Configuration and 404 conflicting shortcuts disabled at build, BACK unchanged.",
+  "version": "1.15.2-moje-tv.12",
+  "description": "Nymind Switcher v12: RED=stable Nymind OS 6 CINEMATIC, GREEN=App Picker. Upstream theme/shortcut key conflicts disabled in build; native BACK unchanged.",
   "packageType": "mods",
   "websiteURL": "https://youtube.com/tv?additionalDataUrl=http%3A%2F%2Flocalhost%3A8085%2Fdial%2Fapps%2FYouTube",
   "main": "dist/userScript-moje-tv-v4.js",
